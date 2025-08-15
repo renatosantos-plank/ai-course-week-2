@@ -3,6 +3,8 @@
   "dependencies": [
     "."
   ],
-  "graphs": {},
+  "graphs": {
+    "react_agent": "./apps/agents/src/day_1/react_agent/graph.ts:graph"
+  },
   "env": ".env"
 }
