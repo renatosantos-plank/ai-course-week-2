@@ -4,7 +4,12 @@
     "."
   ],
   "graphs": {
-    "react_agent": "./apps/agents/src/day_1/react_agent/graph.ts:graph"
+    "react_agent": "./apps/agents/src/day_1/react_agent/graph.ts:graph",
+    "prompt_chaining": "./apps/agents/src/day_1/workflows/prompt_chaining.ts:graph",
+    "parallelization": "./apps/agents/src/day_1/workflows/parallelization.ts:graph",
+    "routing": "./apps/agents/src/day_1/workflows/routing.ts:graph",
+    "orchestrator_worker": "./apps/agents/src/day_1/workflows/orchestrator_worker.ts:graph",
+    "evaluator_optimizer": "./apps/agents/src/day_1/workflows/evaluator_optimizer.ts:graph"
   },
   "env": ".env"
 }
