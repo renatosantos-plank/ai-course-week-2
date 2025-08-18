@@ -55,7 +55,7 @@ let config = { configurable: { thread_id: "1", userId: "1"} }
 let inputMessage = new HumanMessage(`Hi! Remember: my name is Bob`)
 
 for await (const chunk of await graph.stream({ messages: [ inputMessage ] }, { ...config, streamMode: "values"})) {
-  console.log(chunk.messages[chunk.messages.length - 1])
+  // console.log(chunk.messages[chunk.messages.length - 1])
 }
 
 config = { configurable: { thread_id: "2", userId: "1" } };
@@ -64,11 +64,11 @@ for await (const chunk of await graph.stream(
   { messages: [inputMessage] },
   { ...config, streamMode: "values" }
 )) {
-  console.log(chunk.messages[chunk.messages.length - 1]);
+  // console.log(chunk.messages[chunk.messages.length - 1]);
 }
 
 const memories = await inMemoryStore.search(["memories", "1"]);
-console.log("memories", memories)
+// console.log("memories", memories)
 for (const memory of memories) {
-    console.log(await memory.value);
+    // console.log(await memory.value);
 }
