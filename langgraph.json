@@ -9,7 +9,10 @@
     "parallelization": "./apps/agents/src/day_1/workflows/parallelization.ts:graph",
     "routing": "./apps/agents/src/day_1/workflows/routing.ts:graph",
     "orchestrator_worker": "./apps/agents/src/day_1/workflows/orchestrator_worker.ts:graph",
-    "evaluator_optimizer": "./apps/agents/src/day_1/workflows/evaluator_optimizer.ts:graph"
+    "evaluator_optimizer": "./apps/agents/src/day_1/workflows/evaluator_optimizer.ts:graph",
+    "branching": "./apps/agents/src/day_2/branching/graph.ts:graph",
+    "command": "./apps/agents/src/day_2/command/graph.ts:graph",
+    "recursion_limit": "./apps/agents/src/day_2/recursion_limit/graph.ts:graph"
   },
   "env": ".env"
 }
