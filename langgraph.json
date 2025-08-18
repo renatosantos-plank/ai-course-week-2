@@ -12,7 +12,8 @@
     "evaluator_optimizer": "./apps/agents/src/day_1/workflows/evaluator_optimizer.ts:graph",
     "branching": "./apps/agents/src/day_2/branching/graph.ts:graph",
     "command": "./apps/agents/src/day_2/command/graph.ts:graph",
-    "recursion_limit": "./apps/agents/src/day_2/recursion_limit/graph.ts:graph"
+    "recursion_limit": "./apps/agents/src/day_2/recursion_limit/graph.ts:graph",
+    "cross_thread": "./apps/agents/src/day_3/cross_thread/graph.ts:graph"
   },
   "env": ".env"
 }
