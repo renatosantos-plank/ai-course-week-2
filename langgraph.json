@@ -14,7 +14,8 @@
     "command": "./apps/agents/src/day_2/command/graph.ts:graph",
     "recursion_limit": "./apps/agents/src/day_2/recursion_limit/graph.ts:graph",
     "cross_thread": "./apps/agents/src/day_3/cross_thread/graph.ts:graph",
-    "history_management": "./apps/agents/src/day_4/history_management.ts:graph"
+    "history_management": "./apps/agents/src/day_4/history_management.ts:graph",
+    "customer_support": "./apps/agents/src/day_5/customer_support/graph.ts:graph"
   },
   "env": ".env"
 }

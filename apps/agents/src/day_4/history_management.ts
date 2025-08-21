@@ -89,5 +89,5 @@ export const graph = new StateGraph(MessagesAnnotation)
 const config = { configurable: { thread_id: "1" }}
 
 const response = await graph.invoke({}, config)
-console.log("\n\nresponse")
-console.log(response)
+// console.log("\n\nresponse")
+// console.log(response)
