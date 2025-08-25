@@ -1,0 +1,83 @@
+# React/Next.js Development Patterns
+
+This project uses Next.js 15 with React 19 and follows modern React patterns. Follow these guidelines for the web application.
+
+## Project Structure
+
+### App Router
+- Uses Next.js 15 App Router
+- [apps/web/src/app/layout.tsx](mdc:apps/web/src/app/layout.tsx) - Root layout
+- [apps/web/src/app/page.tsx](mdc:apps/web/src/app/page.tsx) - Main page
+
+### Component Organization
+- **UI Components**: [apps/web/src/components/ui/](mdc:apps/web/src/components/ui/) - Reusable UI primitives
+- **Thread Components**: [apps/web/src/components/thread/](mdc:apps/web/src/components/thread/) - Thread management
+- **Icons**: [apps/web/src/components/icons/](mdc:apps/web/src/components/icons/) - Custom icon components
+
+## Styling
+- **Tailwind CSS**: Primary styling framework
+- **CSS Modules**: For component-specific styles
+- **Radix UI**: For accessible component primitives
+- **Framer Motion**: For animations
+
+## State Management
+- **React Hooks**: Use custom hooks for state logic
+- **Context**: For global state (providers in [apps/web/src/providers/](mdc:apps/web/src/providers/))
+- **URL State**: Use `nuqs` for URL-based state management
+
+## Component Patterns
+
+### 1. Functional Components with TypeScript
+```typescript
+interface ComponentProps {
+  title: string;
+  children: React.ReactNode;
+}
+
+export function MyComponent({ title, children }: ComponentProps) {
+  return (
+    <div className="p-4">
+      <h1>{title}</h1>
+      {children}
+    </div>
+  );
+}
+```
+
+### 2. Custom Hooks
+```typescript
+export function useCustomHook() {
+  const [state, setState] = useState();
+  
+  useEffect(() => {
+    // Side effects
+  }, []);
+  
+  return { state, setState };
+}
+```
+
+### 3. Provider Pattern
+```typescript
+export function MyProvider({ children }: { children: React.ReactNode }) {
+  const value = useMemo(() => ({}), []);
+  
+  return (
+    <MyContext.Provider value={value}>
+      {children}
+    </MyContext.Provider>
+  );
+}
+```
+
+## Best Practices
+1. Use TypeScript for all components
+2. Prefer functional components over class components
+3. Use proper prop interfaces
+4. Implement error boundaries for error handling
+5. Use React.memo for performance optimization when needed
+6. Follow accessibility guidelines with Radix UI
+7. Use semantic HTML elements
+8. Implement proper loading states
+9. Use proper form validation with Zod
+

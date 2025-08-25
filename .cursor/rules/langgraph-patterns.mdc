@@ -1,0 +1,85 @@
+# LangGraph Development Patterns
+
+This project uses LangGraph for building stateful, multi-actor applications. Follow these patterns when working with LangGraph agents.
+
+## Core Concepts
+
+### State Management
+- Use `StateGraph` with `MessagesAnnotation` for message-based state
+- Define clear state schemas using Zod
+- Keep state minimal and focused on the conversation flow
+
+### Node Patterns
+- **Tool Nodes**: Use `ToolNode` for executing tools and functions
+- **Conditional Nodes**: Use conditional functions for routing logic
+- **Generate Nodes**: Handle LLM generation with proper context
+
+### Graph Structure
+```typescript
+import { StateGraph, MessagesAnnotation } from "@langchain/langgraph/web";
+
+export const graph = new StateGraph(MessagesAnnotation);
+```
+
+## Common Patterns
+
+### 1. Tool Integration
+```typescript
+import { tool } from "@langchain/core/tools";
+import { ToolNode } from "@langchain/langgraph/prebuilt";
+
+const myTool = tool(
+  async ({ input }) => {
+    // Tool implementation
+    return result;
+  },
+  {
+    name: "MyTool",
+    description: "Tool description",
+    schema: z.object({ input: z.string() })
+  }
+);
+
+const toolNode = new ToolNode([myTool]);
+```
+
+### 2. Conditional Routing
+```typescript
+const routeNode = async (state: typeof MessagesAnnotation.State) => {
+  const lastMessage = state.messages[state.messages.length - 1];
+  
+  if (shouldUseTool(lastMessage)) {
+    return "tool_node";
+  }
+  return "generate_node";
+};
+```
+
+### 3. LLM Generation
+```typescript
+const generateNode = async (state: typeof MessagesAnnotation.State) => {
+  const llm = new ChatGroq({ 
+    model: "llama-3.1-8b-instant", 
+    temperature: 0 
+  });
+  
+  const response = await llm.invoke(state.messages);
+  return { messages: [response] };
+};
+```
+
+## File Organization
+- **graph.ts**: Main graph definition and node connections
+- **model.ts**: LLM configuration and model instances
+- **tools.ts**: Tool definitions and implementations
+- **prompts.ts**: Prompt templates and system messages
+- **nodes.ts**: Individual node implementations
+
+## Best Practices
+1. Use TypeScript for type safety
+2. Implement proper error handling in tools
+3. Keep nodes focused and single-purpose
+4. Use meaningful node names for debugging
+5. Document complex routing logic
+6. Test individual nodes in isolation
+

@@ -1,21 +1,8 @@
 {
-  "node_version": "20",
-  "dependencies": [
-    "."
-  ],
-  "graphs": {
-    "react_agent": "./apps/agents/src/day_1/react_agent/graph.ts:graph",
-    "prompt_chaining": "./apps/agents/src/day_1/workflows/prompt_chaining.ts:graph",
-    "parallelization": "./apps/agents/src/day_1/workflows/parallelization.ts:graph",
-    "routing": "./apps/agents/src/day_1/workflows/routing.ts:graph",
-    "orchestrator_worker": "./apps/agents/src/day_1/workflows/orchestrator_worker.ts:graph",
-    "evaluator_optimizer": "./apps/agents/src/day_1/workflows/evaluator_optimizer.ts:graph",
-    "branching": "./apps/agents/src/day_2/branching/graph.ts:graph",
-    "command": "./apps/agents/src/day_2/command/graph.ts:graph",
-    "recursion_limit": "./apps/agents/src/day_2/recursion_limit/graph.ts:graph",
-    "cross_thread": "./apps/agents/src/day_3/cross_thread/graph.ts:graph",
-    "history_management": "./apps/agents/src/day_4/history_management.ts:graph",
-    "customer_support": "./apps/agents/src/day_5/customer_support/graph.ts:graph"
-  },
-  "env": ".env"
+	"node_version": "20",
+	"dependencies": ["."],
+	"graphs": {
+		"rag_tutorial": "./apps/agents/src/rag_tutorial/rag_chat.ts:graph"
+	},
+	"env": ".env"
 }

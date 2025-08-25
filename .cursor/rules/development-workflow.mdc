@@ -1,0 +1,99 @@
+# Development Workflow
+
+This project uses a monorepo structure with Turbo and pnpm. Follow these workflows for development.
+
+## Getting Started
+
+### Prerequisites
+- Node.js (latest LTS)
+- pnpm 10.6.3+
+- Environment variables configured
+
+### Initial Setup
+```bash
+# Install dependencies
+pnpm install
+
+# Start development servers
+pnpm dev
+```
+
+## Development Commands
+
+### Root Level Commands
+- `pnpm dev` - Start both web and agents in development mode
+- `pnpm build` - Build all applications
+- `pnpm lint` - Run ESLint across all packages
+- `pnpm lint:fix` - Fix ESLint issues automatically
+- `pnpm format` - Format code with Prettier
+
+### Agents App Commands
+```bash
+cd apps/agents
+pnpm dev  # Start LangGraph dev server on port 2024
+pnpm build  # Build TypeScript
+pnpm lint  # Lint TypeScript files
+```
+
+### Web App Commands
+```bash
+cd apps/web
+pnpm dev  # Start Next.js dev server
+pnpm build  # Build for production
+pnpm start  # Start production server
+```
+
+## File Structure Conventions
+
+### Agents App (`apps/agents/src/`)
+- **Day-based organization**: Each day has its own directory
+- **Common patterns**: `graph.ts`, `model.ts`, `tools.ts`, `prompts.ts`
+- **RAG tutorial**: Standalone RAG implementation
+
+### Web App (`apps/web/src/`)
+- **App Router**: Uses Next.js 15 App Router
+- **Component organization**: UI components, thread components, icons
+- **Providers**: Context providers for state management
+
+## Development Tips
+
+### 1. LangGraph Development
+- Use the LangGraph CLI for development: `npx @langgraph/langgraph-cli dev`
+- Test agents through the web interface
+- Check [langgraph.json](mdc:langgraph.json) for configuration
+
+### 2. Frontend Development
+- Use the thread components for agent interactions
+- Implement proper loading states
+- Use TypeScript for type safety
+
+### 3. Debugging
+- Check browser console for frontend issues
+- Use LangGraph dev server logs for agent debugging
+- Implement proper error boundaries
+
+### 4. Environment Variables
+- Create `.env.local` files for local development
+- Use proper API keys for LLM services
+- Follow security best practices
+
+## Common Tasks
+
+### Adding a New Agent
+1. Create new directory in `apps/agents/src/`
+2. Implement `graph.ts` with StateGraph
+3. Add tools, models, and prompts as needed
+4. Test through web interface
+
+### Adding New UI Components
+1. Create component in appropriate directory
+2. Use TypeScript interfaces
+3. Follow existing patterns
+4. Add to exports if needed
+
+### Updating Dependencies
+1. Update in root `package.json` for shared deps
+2. Update in specific app `package.json` for app-specific deps
+3. Run `pnpm install` to update lockfile
+4. Test thoroughly after updates
+

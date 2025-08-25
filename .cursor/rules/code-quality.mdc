@@ -1,0 +1,162 @@
+# Code Quality Standards
+
+This project follows strict code quality standards with ESLint, Prettier, and TypeScript. Follow these guidelines for consistent, maintainable code.
+
+## Code Formatting
+
+### Prettier Configuration
+- **Config**: [apps/agents/.prettierrc](mdc:apps/agents/.prettierrc) and [apps/web/.prettierrc](mdc:apps/web/.prettierrc)
+- **Command**: `pnpm format` - Format all code
+- **Auto-format**: Configure your editor to format on save
+
+### TypeScript Configuration
+- **Config**: [tsconfig.json](mdc:tsconfig.json) - Root TypeScript config
+- **Strict mode**: Enabled for type safety
+- **Path mapping**: Configured for clean imports
+
+## Linting Rules
+
+### ESLint Configuration
+- **Config**: [apps/agents/eslint.config.js](mdc:apps/agents/eslint.config.js) and [apps/web/eslint.config.js](mdc:apps/web/eslint.config.js)
+- **Command**: `pnpm lint` - Check for issues
+- **Auto-fix**: `pnpm lint:fix` - Fix automatically fixable issues
+
+### Key Rules
+1. **Import organization**: Use absolute imports when possible
+2. **No unused variables**: Remove unused imports and variables
+3. **Type safety**: Use proper TypeScript types
+4. **React hooks**: Follow React hooks rules
+5. **No console.log**: Use proper logging in production
+
+## Code Style Guidelines
+
+### TypeScript
+```typescript
+// ✅ Good
+interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
+const getUser = async (id: string): Promise<User | null> => {
+  // Implementation
+};
+
+// ❌ Bad
+const getUser = async (id) => {
+  // Missing types
+};
+```
+
+### React Components
+```typescript
+// ✅ Good
+interface ButtonProps {
+  children: React.ReactNode;
+  onClick: () => void;
+  variant?: 'primary' | 'secondary';
+}
+
+export function Button({ children, onClick, variant = 'primary' }: ButtonProps) {
+  return (
+    <button 
+      className={`btn btn-${variant}`}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+}
+
+// ❌ Bad
+export function Button(props) {
+  return <button onClick={props.onClick}>{props.children}</button>;
+}
+```
+
+### LangGraph Patterns
+```typescript
+// ✅ Good
+const generateNode = async (state: typeof MessagesAnnotation.State) => {
+  const llm = new ChatGroq({ 
+    model: "llama-3.1-8b-instant", 
+    temperature: 0 
+  });
+  
+  const response = await llm.invoke(state.messages);
+  return { messages: [response] };
+};
+
+// ❌ Bad
+const generateNode = async (state) => {
+  const llm = new ChatGroq();
+  return { messages: [await llm.invoke(state.messages)] };
+};
+```
+
+## File Naming Conventions
+
+### Agents App
+- `graph.ts` - Main graph definition
+- `model.ts` - LLM configuration
+- `tools.ts` - Tool definitions
+- `prompts.ts` - Prompt templates
+- `nodes.ts` - Node implementations
+
+### Web App
+- `ComponentName.tsx` - React components (PascalCase)
+- `useHookName.ts` - Custom hooks (camelCase)
+- `utils.ts` - Utility functions
+- `types.ts` - TypeScript type definitions
+
+## Best Practices
+
+### 1. Error Handling
+```typescript
+// ✅ Good
+try {
+  const result = await riskyOperation();
+  return result;
+} catch (error) {
+  console.error('Operation failed:', error);
+  throw new Error('Failed to perform operation');
+}
+
+// ❌ Bad
+const result = await riskyOperation();
+return result;
+```
+
+### 2. Async/Await
+```typescript
+// ✅ Good
+const fetchData = async (): Promise<Data[]> => {
+  const response = await fetch('/api/data');
+  return response.json();
+};
+
+// ❌ Bad
+const fetchData = () => {
+  return fetch('/api/data').then(response => response.json());
+};
+```
+
+### 3. Comments and Documentation
+```typescript
+/**
+ * Fetches user data from the API
+ * @param userId - The unique identifier of the user
+ * @returns Promise resolving to user data or null if not found
+ */
+const fetchUser = async (userId: string): Promise<User | null> => {
+  // Implementation
+};
+```
+
+## Pre-commit Checklist
+1. Run `pnpm lint` to check for issues
+2. Run `pnpm format` to ensure consistent formatting
+3. Run `pnpm build` to ensure everything compiles
+4. Test your changes in the development environment
+
